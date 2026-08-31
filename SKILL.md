@@ -1,6 +1,11 @@
 ---
 name: local-docker-port-resolver
 description: Add or repair automatic host-port selection for enabled services in local Docker Compose stacks. Use when development or local simulation launchers must avoid conflicts across applications, proxies, mail UIs, dashboards, and other published services while synchronizing public URLs. Keep actual production endpoints explicit.
+license: MIT
+metadata:
+  author: 1ntekhab
+  version: "1.1.0"
+  compatibility: Agent Skills-compatible coding agents with repository file and shell access; Docker Compose is required for rendered configuration and live verification.
 ---
 
 # Local Docker Port Resolver
