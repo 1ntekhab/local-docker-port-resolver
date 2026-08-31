@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here.
 
+## [1.4.0] - 2026-09-01
+
+### Added
+
+- Explicit Cursor compatibility and installation guidance for user-level and project-level skills.
+
 ## [1.3.0] - 2026-09-01
 
 ### Added
@@ -44,3 +50,4 @@ All notable changes to this project are documented here.
 [1.0.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.0.0
 [1.2.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.2.0
 [1.3.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.3.0
+[1.4.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.4.0

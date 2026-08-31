@@ -76,6 +76,7 @@ The core package follows the open Agent Skills `SKILL.md` format. It can be disc
 | OpenAI Codex | Native | `agents/openai.yaml` inside the skill package adds Codex-specific UI metadata. |
 | Claude Code | Native | Uses `SKILL.md` and the bundled reference directly. |
 | GitHub Copilot | Native | Supported in VS Code, Copilot CLI, and the Copilot cloud agent. |
+| Cursor | Native | Discovers the open Agent Skills package and can apply it directly to target projects. |
 | Other Agent Skills clients | Format-compatible | Install in the skill directory documented by that client. |
 | Agents without skills support | Manual instructions only | Provide `SKILL.md` as project context; automatic discovery is not guaranteed. |
 
@@ -90,6 +91,7 @@ Review a third-party skill before installation. The recommended CLIs discover th
 | OpenAI Codex | `~/.codex/skills/local-docker-port-resolver` | Use the project skill location supported by your Codex environment. |
 | Claude Code | `~/.claude/skills/local-docker-port-resolver` | `.claude/skills/local-docker-port-resolver` |
 | GitHub Copilot | `~/.copilot/skills/local-docker-port-resolver` | `.github/skills/local-docker-port-resolver` |
+| Cursor | `~/.cursor/skills/local-docker-port-resolver` | `.cursor/skills/local-docker-port-resolver` |
 | Shared compatible location | `~/.agents/skills/local-docker-port-resolver` | `.agents/skills/local-docker-port-resolver` |
 
 Install with GitHub CLI and select the target agent when prompted:
