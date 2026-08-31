@@ -2,6 +2,16 @@
 
 All notable changes to this project are documented here.
 
+## [1.3.0] - 2026-09-01
+
+### Added
+
+- Repository-local `AGENTS.md` guidance that makes the generated launcher the preferred startup path for coding agents.
+
+### Changed
+
+- Launcher preference is project-scoped by default; global agent instructions are left unchanged unless explicitly requested.
+
 ## [1.2.0] - 2026-09-01
 
 ### Added
@@ -33,3 +43,4 @@ All notable changes to this project are documented here.
 [1.1.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.1.0
 [1.0.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.0.0
 [1.2.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.2.0
+[1.3.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.3.0

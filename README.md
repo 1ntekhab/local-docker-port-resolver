@@ -49,6 +49,12 @@ Preferred app port 8080 is occupied
 
 The same data-driven process covers enabled auxiliary services such as Mailpit, Grafana, debuggers, and storage consoles while preventing collisions between ports selected in the same launch.
 
+## Keep the launcher project-local
+
+The skill makes the launcher the repository's documented startup path. When a project uses `AGENTS.md`, it also adds or updates a repository-local instruction telling coding agents to prefer that launcher over direct Compose startup.
+
+This keeps the behavior attached to the project for every contributor and agent without imposing a global launcher rule on unrelated repositories. The skill does not modify global Codex, Claude, Copilot, or other agent instructions unless the user explicitly requests that separate policy change.
+
 ## What it handles
 
 - Multi-service Docker Compose stacks.

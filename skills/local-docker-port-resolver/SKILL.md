@@ -4,7 +4,7 @@ description: Add or repair automatic host-port selection for enabled services in
 license: MIT
 metadata:
   author: 1ntekhab
-  version: "1.2.0"
+  version: "1.3.0"
   compatibility: Agent Skills-compatible coding agents with repository file and shell access; Docker Compose is required for rendered configuration and live verification.
 ---
 
@@ -26,6 +26,8 @@ Add predictable local Docker Compose port fallback without changing internal ser
 - Keep direct lower-level startup commands available for advanced use unless the user requests their removal.
 - Avoid a new dependency when the existing runtime provides socket probing, process spawning, and environment parsing.
 - For a Node.js plus Docker Compose implementation, read [the verified Node/Compose pattern](references/node-compose-pattern.md).
+- Make the supported launcher the documented project startup path. When the repository uses `AGENTS.md`, add or update a repository-local instruction that tells coding agents to prefer the launcher over direct Compose startup while preserving existing instructions.
+- Keep this preference project-scoped. Do not modify a user's global Codex, Claude, Copilot, or other agent instructions unless the user explicitly requests a global policy.
 
 ## Preserve the port contract
 
