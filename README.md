@@ -71,14 +71,19 @@ The skill is framework-neutral. It can adapt to Django, Next.js, Laravel, ASP.NE
 
 The core package follows the open Agent Skills `SKILL.md` format. It can be discovered by clients that implement that standard.
 
-| Agent platform | Support | Notes |
+| Agent platform | Platform support | Repository verification |
 |---|---|---|
-| OpenAI Codex | Native | `agents/openai.yaml` inside the skill package adds Codex-specific UI metadata. |
-| Claude Code | Native | Uses `SKILL.md` and the bundled reference directly. |
-| GitHub Copilot | Native | Supported in VS Code, Copilot CLI, and the Copilot cloud agent. |
-| Cursor | Native | Discovers the open Agent Skills package and can apply it directly to target projects. |
-| Other Agent Skills clients | Format-compatible | Install in the skill directory documented by that client. |
+| OpenAI Codex | Native | Validated and used to implement the reference project. `agents/openai.yaml` adds optional Codex UI metadata. |
+| Claude Code | Native | Format-validated; live agent test pending. |
+| GitHub Copilot | Native | Format-validated; live agent test pending. |
+| Cursor | Native | Format-validated; live agent test pending. |
+| Gemini CLI | Native | Format-validated; live agent test pending. |
+| OpenCode | Native | Format-validated; live agent test pending. |
+| Cline | Native, experimental feature | Format-validated; live agent test pending. |
+| Other Agent Skills clients | Format-compatible | Install in the skill directory documented by that client; verify before claiming live support. |
 | Agents without skills support | Manual instructions only | Provide `SKILL.md` as project context; automatic discovery is not guaranteed. |
+
+“Native” means the platform officially supports Agent Skills discovery and invocation. It does not mean this specific skill has completed a live end-to-end test on that platform; the verification column records that separately.
 
 The skill requires an agent with repository filesystem and shell access. Docker Compose is needed for rendered configuration and live conflict verification.
 
@@ -92,6 +97,9 @@ Review a third-party skill before installation. The recommended CLIs discover th
 | Claude Code | `~/.claude/skills/local-docker-port-resolver` | `.claude/skills/local-docker-port-resolver` |
 | GitHub Copilot | `~/.copilot/skills/local-docker-port-resolver` | `.github/skills/local-docker-port-resolver` |
 | Cursor | `~/.cursor/skills/local-docker-port-resolver` | `.cursor/skills/local-docker-port-resolver` |
+| Gemini CLI | `~/.gemini/skills/local-docker-port-resolver` | `.gemini/skills/local-docker-port-resolver` |
+| OpenCode | `~/.config/opencode/skills/local-docker-port-resolver` | `.opencode/skills/local-docker-port-resolver` |
+| Cline | `~/.cline/skills/local-docker-port-resolver` | `.cline/skills/local-docker-port-resolver` |
 | Shared compatible location | `~/.agents/skills/local-docker-port-resolver` | `.agents/skills/local-docker-port-resolver` |
 
 Install with GitHub CLI and select the target agent when prompted:

@@ -4,7 +4,7 @@ description: Add or repair automatic host-port selection for enabled services in
 license: MIT
 metadata:
   author: 1ntekhab
-  version: "1.4.0"
+  version: "1.5.0"
   compatibility: Agent Skills-compatible coding agents with repository file and shell access; Docker Compose is required for rendered configuration and live verification.
 ---
 
