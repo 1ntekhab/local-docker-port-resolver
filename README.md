@@ -1,8 +1,53 @@
 # Local Docker Port Resolver
 
-A portable [Agent Skill](https://agentskills.io) for preventing host-port collisions across local Docker Compose projects.
+**Stop local Docker port conflicts before they stop your stack.**
+
+[![Release](https://img.shields.io/github/v/release/1ntekhab/local-docker-port-resolver)](https://github.com/1ntekhab/local-docker-port-resolver/releases/latest)
+[![License](https://img.shields.io/github/license/1ntekhab/local-docker-port-resolver)](LICENSE)
+[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-5B5BD6)](https://agentskills.io)
+[![GitHub stars](https://img.shields.io/github/stars/1ntekhab/local-docker-port-resolver?style=flat)](https://github.com/1ntekhab/local-docker-port-resolver/stargazers)
+
+A portable [Agent Skill](https://agentskills.io) that teaches coding agents to prevent host-port collisions across local Docker Compose projects—without changing internal container ports.
+
+![Local Docker Port Resolver routes conflicting local ports into available mappings](assets/social-preview.png)
 
 It inspects every enabled published service, selects available host ports without changing container ports, synchronizes public URLs and trusted origins, preserves optional profiles, and keeps actual production endpoints explicit.
+
+## Quick start
+
+Install through the cross-platform Skills CLI:
+
+```bash
+npx skills add 1ntekhab/local-docker-port-resolver
+```
+
+Or install through GitHub CLI Agent Skills:
+
+```bash
+gh skill install 1ntekhab/local-docker-port-resolver
+```
+
+Then ask your coding agent:
+
+```text
+Use the Local Docker Port Resolver skill to add automatic host-port conflict resolution to this project's local Docker Compose stack.
+```
+
+## Before and after
+
+Without a resolver, two projects that both publish `8080:80` cannot run together. Docker starts one and rejects the other because the host port is already occupied.
+
+With this skill, the agent builds a project-native launcher that:
+
+```text
+Preferred app port 8080 is occupied
+→ selects 8081 within the bounded development range
+→ keeps Nginx listening on container port 80
+→ updates the public app URL and trusted origins
+→ starts Compose and prints http://localhost:8081
+```
+
+The same data-driven process covers enabled auxiliary services such as Mailpit, Grafana, debuggers, and storage consoles while preventing collisions between ports selected in the same launch.
 
 ## What it handles
 
@@ -22,7 +67,7 @@ The core package follows the open Agent Skills `SKILL.md` format. It can be disc
 
 | Agent platform | Support | Notes |
 |---|---|---|
-| OpenAI Codex | Native | `agents/openai.yaml` adds Codex-specific UI metadata. |
+| OpenAI Codex | Native | `agents/openai.yaml` inside the skill package adds Codex-specific UI metadata. |
 | Claude Code | Native | Uses `SKILL.md` and the bundled reference directly. |
 | GitHub Copilot | Native | Supported in VS Code, Copilot CLI, and the Copilot cloud agent. |
 | Other Agent Skills clients | Format-compatible | Install in the skill directory documented by that client. |
@@ -32,7 +77,7 @@ The skill requires an agent with repository filesystem and shell access. Docker 
 
 ## Install
 
-Review a third-party skill before installation, then clone this repository into the appropriate personal or project skill directory. The destination folder must remain named `local-docker-port-resolver` so it matches the `name` in `SKILL.md`.
+Review a third-party skill before installation. The recommended CLIs discover the packaged skill under `skills/local-docker-port-resolver` and place it in the correct directory for the selected agent.
 
 | Platform | Personal installation | Project installation |
 |---|---|---|
@@ -41,25 +86,22 @@ Review a third-party skill before installation, then clone this repository into 
 | GitHub Copilot | `~/.copilot/skills/local-docker-port-resolver` | `.github/skills/local-docker-port-resolver` |
 | Shared compatible location | `~/.agents/skills/local-docker-port-resolver` | `.agents/skills/local-docker-port-resolver` |
 
-Example for Codex on Windows PowerShell:
-
-```powershell
-git clone https://github.com/1ntekhab/local-docker-port-resolver.git `
-  "$env:USERPROFILE\.codex\skills\local-docker-port-resolver"
-```
-
-Example for Claude Code on macOS or Linux:
+Install with GitHub CLI and select the target agent when prompted:
 
 ```bash
-git clone https://github.com/1ntekhab/local-docker-port-resolver.git \
-  ~/.claude/skills/local-docker-port-resolver
+gh skill install 1ntekhab/local-docker-port-resolver local-docker-port-resolver
 ```
 
-Example for a repository-shared GitHub Copilot skill:
+Or use the cross-platform Skills CLI:
 
 ```bash
-git clone https://github.com/1ntekhab/local-docker-port-resolver.git \
-  .github/skills/local-docker-port-resolver
+npx skills add 1ntekhab/local-docker-port-resolver
+```
+
+For a manual installation, copy only the packaged directory into the appropriate destination and keep its folder name unchanged:
+
+```bash
+skills/local-docker-port-resolver/
 ```
 
 Restart or open a new agent session if the installed skill is not discovered immediately.
@@ -84,11 +126,18 @@ Automatic fallback is for local development and explicitly supported local simul
 
 ## Skill contents
 
-- `SKILL.md` contains the reusable workflow and constraints.
-- `references/node-compose-pattern.md` contains the detailed Node.js and Docker Compose pattern.
-- `agents/openai.yaml` supplies optional Codex UI metadata and the default prompt. Other agents can ignore it.
+- `skills/local-docker-port-resolver/SKILL.md` contains the reusable workflow and constraints.
+- `skills/local-docker-port-resolver/references/node-compose-pattern.md` contains the detailed Node.js and Docker Compose pattern.
+- `skills/local-docker-port-resolver/agents/openai.yaml` supplies optional Codex UI metadata and the default prompt. Other agents can ignore it.
 
 Only `SKILL.md` is required by the open format. The reference file is portable supporting material, and the `agents` directory is a product-specific enhancement.
+
+## Contributing and support
+
+- Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing changes.
+- Use the repository issue forms for reproducible bugs and stack-support requests.
+- Report security concerns through the private process in [SECURITY.md](SECURITY.md), not a public issue.
+- See [CHANGELOG.md](CHANGELOG.md) for release history.
 
 ## Standards and platform documentation
 

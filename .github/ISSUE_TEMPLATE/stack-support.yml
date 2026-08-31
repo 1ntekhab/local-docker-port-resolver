@@ -1,0 +1,32 @@
+name: Stack support request
+description: Propose guidance or an example for another framework or service.
+title: "[Stack]: "
+labels:
+  - enhancement
+body:
+  - type: input
+    id: stack
+    attributes:
+      label: Frameworks and services
+      placeholder: Laravel, ASP.NET, Mailpit, MinIO, or another stack
+    validations:
+      required: true
+  - type: textarea
+    id: ports
+    attributes:
+      label: Published ports and URL consumers
+      description: Identify the relevant Compose services and application settings if known.
+    validations:
+      required: true
+  - type: textarea
+    id: value
+    attributes:
+      label: Why this example is useful
+    validations:
+      required: true
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I can help test or contribute this example.

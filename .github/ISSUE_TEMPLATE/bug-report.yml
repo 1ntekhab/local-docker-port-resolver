@@ -1,0 +1,49 @@
+name: Bug report
+description: Report incorrect or unsafe resolver guidance.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for providing a reproducible report. Remove secrets and private project data before submitting.
+  - type: input
+    id: agent
+    attributes:
+      label: Coding agent and version
+      placeholder: Codex, Claude Code, GitHub Copilot, or another client
+    validations:
+      required: true
+  - type: input
+    id: compose
+    attributes:
+      label: Docker Compose version
+    validations:
+      required: true
+  - type: textarea
+    id: stack
+    attributes:
+      label: Stack and enabled services
+      description: List the relevant frameworks, Compose files, profiles, and published services.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Explain the port conflict, request given to the agent, and resulting behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed credentials, private URLs, and sensitive environment values.
+          required: true
