@@ -1,4 +1,4 @@
 interface:
   display_name: "Local Docker Port Resolver"
-  short_description: "Prevent local Docker host-port conflicts"
-  default_prompt: "Use $local-docker-port-resolver to make this project's enabled local Docker services start without host-port conflicts."
+  short_description: "Resolve Docker ports through one dev launcher"
+  default_prompt: "Use $local-docker-port-resolver to make this project's enabled local Docker services start without host-port conflicts through its canonical dev:up launcher."

@@ -25,6 +25,7 @@ Thank you for helping Local Docker Port Resolver support more local development 
 - [ ] New published ports and every consumer of their public URLs are covered.
 - [ ] Explicit overrides fail clearly when unavailable.
 - [ ] Optional services remain opt-in.
+- [ ] The documented `dev:up` command uses the resolver-backed launcher, and replaced full-stack launcher names have no remaining callers or compatibility aliases.
 - [ ] Documentation and examples match the behavior.
 - [ ] No secrets or unrelated generated files are included.
 

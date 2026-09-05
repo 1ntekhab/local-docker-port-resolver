@@ -7,7 +7,7 @@
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-5B5BD6)](https://agentskills.io)
 [![GitHub stars](https://img.shields.io/github/stars/1ntekhab/local-docker-port-resolver?style=flat)](https://github.com/1ntekhab/local-docker-port-resolver/stargazers)
 
-A portable [Agent Skill](https://agentskills.io) that teaches coding agents to prevent host-port collisions across local Docker Compose projects—without changing internal container ports.
+A portable [Agent Skill](https://agentskills.io) that teaches coding agents to prevent host-port collisions across local Docker Compose projects and standardize the project-native full-stack launcher—without changing internal container ports.
 
 ![Local Docker Port Resolver routes conflicting local ports into available mappings](assets/social-preview.png)
 
@@ -49,6 +49,12 @@ Preferred app port 8080 is occupied
 
 The same data-driven process covers enabled auxiliary services such as Mailpit, Grafana, debuggers, and storage consoles while preventing collisions between ports selected in the same launch.
 
+## One canonical full-stack command
+
+For pnpm-managed projects, the skill exposes and documents `pnpm dev:up` as the canonical command for starting the complete local Docker Compose development stack. That package script runs the resolver-backed launcher rather than invoking Compose directly.
+
+When a project already uses a full-stack command such as `local:up`, the skill replaces it with `dev:up`, updates its callers and documentation, and removes the old script instead of leaving a compatibility alias. Projects managed by npm, Yarn, Bun, or another package manager keep that manager and use its equivalent `dev:up` command.
+
 ## Keep the launcher project-local
 
 The skill makes the launcher the repository's documented startup path. When a project uses `AGENTS.md`, it also adds or updates a repository-local instruction telling coding agents to prefer that launcher over direct Compose startup.
@@ -58,6 +64,7 @@ This keeps the behavior attached to the project for every contributor and agent 
 ## What it handles
 
 - Multi-service Docker Compose stacks.
+- A consistent `dev:up` entry point wired to the resolver-backed full-stack launcher.
 - Development and explicitly supported local-production simulations.
 - Primary application edges, Mailpit, Grafana, debuggers, storage consoles, and other enabled published services.
 - Strict named port overrides and bounded automatic fallback.

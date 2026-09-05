@@ -1,10 +1,10 @@
 ---
 name: local-docker-port-resolver
-description: Add or repair automatic host-port selection for enabled services in local Docker Compose stacks. Use when development or local simulation launchers must avoid conflicts across applications, proxies, mail UIs, dashboards, and other published services while synchronizing public URLs. Keep actual production endpoints explicit.
+description: Add or repair automatic host-port selection for enabled services in local Docker Compose stacks and standardize the project-native full-stack launcher. Use when development or local simulation launchers must avoid conflicts across applications, proxies, mail UIs, dashboards, and other published services while synchronizing public URLs. Keep actual production endpoints explicit.
 license: MIT
 metadata:
   author: 1ntekhab
-  version: "1.5.0"
+  version: "1.6.0"
   compatibility: Agent Skills-compatible coding agents with repository file and shell access; Docker Compose is required for rendered configuration and live verification.
 ---
 
@@ -23,6 +23,9 @@ Add predictable local Docker Compose port fallback without changing internal ser
 ## Choose the launcher integration
 
 - Prefer the language/runtime already required by the repository and wire the launcher into its existing local start command.
+- In every pnpm-managed repository, expose and document `pnpm dev:up` as the canonical command for starting the complete local Docker Compose development stack. Map the `dev:up` package script to the resolver-backed launcher, not directly to Compose.
+- Replace existing full-stack launcher names such as `local:up` with `dev:up`, update every caller and document, and remove the old package scripts. Do not retain compatibility aliases.
+- Do not introduce pnpm into repositories managed by npm, Yarn, Bun, or another package manager solely to obtain this name; use the equivalent `dev:up` script for that repository's existing package manager.
 - Keep direct lower-level startup commands available for advanced use unless the user requests their removal.
 - Avoid a new dependency when the existing runtime provides socket probing, process spawning, and environment parsing.
 - For a Node.js plus Docker Compose implementation, read [the verified Node/Compose pattern](references/node-compose-pattern.md).

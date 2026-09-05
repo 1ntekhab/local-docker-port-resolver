@@ -4,6 +4,8 @@ Use this pattern when a repository already requires Node.js and starts its local
 
 ## Launcher sequence
 
+For pnpm repositories, register the resolver-backed launcher as the `dev:up` package script and document `pnpm dev:up` as the only full-stack development command. Replace established names such as `local:up`, update all callers, and remove the old scripts without compatibility aliases. With other package managers, retain that manager and use its equivalent `dev:up` script.
+
 1. Select a named local mode and its Compose files, profiles, environment files, and project name.
 2. Ask Compose for the services active in that selection, then filter a data-driven port-target registry to those services. Do not activate optional profiles during discovery.
 3. Parse strict repeatable named overrides such as `--port app=8090` and `--port mailpit=8026`. If the repository already exposes numeric `--port 8090`, retain it as the primary application shorthand.
@@ -44,7 +46,7 @@ Mode metadata should also define Compose arguments, its environment-file precede
 - Proxy redirects, MFA/WebAuthn verifier origins, health URLs, and E2E configuration.
 - Frontend relative or absolute API configuration.
 - Mail viewer, metrics dashboard, debugger, storage UI, and other auxiliary links.
-- Package-manager start command and argument-forwarding syntax.
+- Canonical `dev:up` package-manager command and argument-forwarding syntax; verify that replaced launcher names have no remaining callers.
 - Follow-up commands that need the resolved-state file.
 - Unit-test location and normal repository test entry point.
 

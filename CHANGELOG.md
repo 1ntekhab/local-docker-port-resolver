@@ -2,6 +2,17 @@
 
 All notable changes to this project are documented here.
 
+## [1.6.0] - 2026-09-05
+
+### Added
+
+- A canonical `dev:up` full-stack launcher convention, including `pnpm dev:up` for pnpm-managed repositories and the equivalent command for other existing package managers.
+
+### Changed
+
+- Existing full-stack launcher names such as `local:up` are replaced without compatibility aliases, with every caller and document updated.
+- Skill and Codex UI descriptions now identify the project-native launcher behavior alongside automatic port conflict resolution.
+
 ## [1.5.0] - 2026-09-01
 
 ### Added
@@ -59,3 +70,4 @@ All notable changes to this project are documented here.
 [1.3.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.3.0
 [1.4.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.4.0
 [1.5.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.5.0
+[1.6.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.6.0
