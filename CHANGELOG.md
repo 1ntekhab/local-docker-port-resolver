@@ -2,7 +2,7 @@
 
 All notable changes to this project are documented here.
 
-## [2.0.0] - Unreleased
+## [2.0.0] - 2026-11-03
 
 ### Changed
 
@@ -11,8 +11,11 @@ All notable changes to this project are documented here.
 - Added migration guidance for exact pnpm version pins, supported lockfile imports, frozen installs, dependency build-script approvals, Docker/CI alignment, and production packaging verification while preserving dependency versions where possible.
 - Projects without JavaScript packages may expose the launcher through a private root package while retaining native backend tools and existing launcher implementations.
 - Aligned the README and contribution checklist with the new package-manager policy and required skill validators.
+- Includes the launcher changes recorded under 1.6.0, which were not previously published as a GitHub release.
 
 ## [1.6.0] - 2026-09-05
+
+Release-status clarification (2026-11-03): these changes were committed but not tagged or published as a GitHub release. They are included in v2.0.0.
 
 ### Added
 
@@ -80,5 +83,5 @@ All notable changes to this project are documented here.
 [1.3.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.3.0
 [1.4.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.4.0
 [1.5.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.5.0
-[1.6.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.6.0
-[2.0.0]: https://github.com/1ntekhab/local-docker-port-resolver/compare/v1.6.0...HEAD
+[1.6.0]: https://github.com/1ntekhab/local-docker-port-resolver/commit/516a4311bdd52061a4f0618814c920246403e422
+[2.0.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v2.0.0
