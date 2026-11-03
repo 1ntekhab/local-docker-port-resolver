@@ -16,7 +16,7 @@ Thank you for helping Local Docker Port Resolver support more local development 
 3. Keep internal container ports fixed unless the application itself requires an internal change.
 4. Never make real production endpoints dynamic.
 5. Do not add secrets, generated credentials, local environment files, or project-specific private data.
-6. Validate the skill with an Agent Skills-compatible validator.
+6. Validate the packaged skill with the Codex skill-creator validator, the Agent Skills reference validator, and `gh skill publish --dry-run`.
 7. Test instructions against a representative Compose project and describe the evidence in the pull request.
 
 ## Pull request checklist
@@ -25,7 +25,8 @@ Thank you for helping Local Docker Port Resolver support more local development 
 - [ ] New published ports and every consumer of their public URLs are covered.
 - [ ] Explicit overrides fail clearly when unavailable.
 - [ ] Optional services remain opt-in.
-- [ ] The documented `dev:up` command uses the resolver-backed launcher, and replaced full-stack launcher names have no remaining callers or compatibility aliases.
+- [ ] The documented `pnpm dev:up` command uses the resolver-backed launcher, and replaced full-stack launcher names have no remaining callers or compatibility aliases; explicit user requirements for another package manager are respected.
+- [ ] Applicable pnpm migrations pin an exact compatible version, import supported lockfiles, verify frozen installation and argument forwarding, and align Docker/CI workflows without unrelated dependency upgrades.
 - [ ] Documentation and examples match the behavior.
 - [ ] No secrets or unrelated generated files are included.
 

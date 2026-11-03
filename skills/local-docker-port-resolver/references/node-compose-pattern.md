@@ -1,10 +1,14 @@
 # Verified Node.js and Docker Compose Pattern
 
-Use this pattern when a repository already requires Node.js and starts its local stack with Docker Compose. Adapt names and consumers to the project; do not assume Nginx, Django, or Next.js unless inspection confirms them.
+Use this pattern for the standardized pnpm entry point of a local Docker Compose stack. Adapt names and consumers to the project; do not assume Nginx, Django, or Next.js unless inspection confirms them. Existing backend launchers can be invoked through a private root package script without replacing their implementation.
 
 ## Launcher sequence
 
-For pnpm repositories, register the resolver-backed launcher as the `dev:up` package script and document `pnpm dev:up` as the only full-stack development command. Replace established names such as `local:up`, update all callers, and remove the old scripts without compatibility aliases. With other package managers, retain that manager and use its equivalent `dev:up` script.
+Register the resolver-backed launcher as the `dev:up` package script and document `pnpm dev:up` as the only full-stack development command. Replace established names such as `local:up`, update all callers, and remove the old scripts without compatibility aliases. Follow the skill's pnpm migration rules before verifying startup.
+
+Pin a compatible pnpm version with `packageManager` in each independent JavaScript package root, or in the workspace root for an existing workspace. Keep existing package boundaries unless a workspace adds concrete value. Import existing lockfiles, then verify frozen installation. Docker build contexts must include the matching manifest, pnpm lockfile and any workspace settings; the runtime image should contain only the built application and its runtime dependencies. A pinned npm bootstrap of pnpm inside the build image is acceptable.
+
+Pass launcher arguments directly, for example `pnpm dev:up --port app=8090`. In PowerShell tool calls, `pnpm.cmd` avoids script-wrapper ambiguity; it runs the same pinned package manager.
 
 1. Select a named local mode and its Compose files, profiles, environment files, and project name.
 2. Ask Compose for the services active in that selection, then filter a data-driven port-target registry to those services. Do not activate optional profiles during discovery.
@@ -46,7 +50,8 @@ Mode metadata should also define Compose arguments, its environment-file precede
 - Proxy redirects, MFA/WebAuthn verifier origins, health URLs, and E2E configuration.
 - Frontend relative or absolute API configuration.
 - Mail viewer, metrics dashboard, debugger, storage UI, and other auxiliary links.
-- Canonical `dev:up` package-manager command and argument-forwarding syntax; verify that replaced launcher names have no remaining callers.
+- Canonical `pnpm dev:up` command and argument-forwarding syntax; verify that replaced launcher names and obsolete package-manager commands have no remaining active callers.
+- Pinned pnpm version, imported lockfile, dependency build-script policy, frozen installs, Docker context/volumes, CI and production packaging.
 - Follow-up commands that need the resolved-state file.
 - Unit-test location and normal repository test entry point.
 

@@ -7,7 +7,7 @@
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-5B5BD6)](https://agentskills.io)
 [![GitHub stars](https://img.shields.io/github/stars/1ntekhab/local-docker-port-resolver?style=flat)](https://github.com/1ntekhab/local-docker-port-resolver/stargazers)
 
-A portable [Agent Skill](https://agentskills.io) that teaches coding agents to prevent host-port collisions across local Docker Compose projects and standardize the project-native full-stack launcher—without changing internal container ports.
+A portable [Agent Skill](https://agentskills.io) that teaches coding agents to prevent host-port collisions across local Docker Compose projects and standardize full-stack startup on `pnpm dev:up` without changing internal container ports.
 
 ![Local Docker Port Resolver routes conflicting local ports into available mappings](assets/social-preview.png)
 
@@ -37,7 +37,7 @@ Use the Local Docker Port Resolver skill to add automatic host-port conflict res
 
 Without a resolver, two projects that both publish `8080:80` cannot run together. Docker starts one and rejects the other because the host port is already occupied.
 
-With this skill, the agent builds a project-native launcher that:
+With this skill, the agent builds or adapts a resolver-backed launcher, exposed through `pnpm dev:up`, that:
 
 ```text
 Preferred app port 8080 is occupied
@@ -51,9 +51,13 @@ The same data-driven process covers enabled auxiliary services such as Mailpit, 
 
 ## One canonical full-stack command
 
-For pnpm-managed projects, the skill exposes and documents `pnpm dev:up` as the canonical command for starting the complete local Docker Compose development stack. That package script runs the resolver-backed launcher rather than invoking Compose directly.
+The skill exposes and documents `pnpm dev:up` as the canonical command for starting the complete local Docker Compose development stack. That package script runs the resolver-backed launcher rather than invoking Compose directly.
 
-When a project already uses a full-stack command such as `local:up`, the skill replaces it with `dev:up`, updates its callers and documentation, and removes the old script instead of leaving a compatibility alias. Projects managed by npm, Yarn, Bun, or another package manager keep that manager and use its equivalent `dev:up` command.
+When a project already uses a full-stack command such as `local:up`, the skill replaces it with `dev:up`, updates its callers and documentation, and removes the old script instead of leaving a compatibility alias.
+
+Version 2.0 changes the package-manager policy: applying the skill includes migrating JavaScript dependency management from npm, Yarn, or Bun to pnpm unless the user explicitly requires another manager. The migration pins an exact compatible pnpm version, imports supported lockfiles, verifies frozen installation, and aligns scripts, Docker builds, CI, and current documentation. Dependency versions are preserved where possible; changing package managers is not a reason to upgrade application dependencies.
+
+Projects without JavaScript packages may use a private root `package.json` to expose the launcher while retaining their native backend dependency tools and existing launcher implementation. The skill documents the required Node/pnpm prerequisites and verifies argument forwarding, dependency build-script approvals, and production packaging where applicable.
 
 ## Keep the launcher project-local
 
@@ -64,7 +68,8 @@ This keeps the behavior attached to the project for every contributor and agent 
 ## What it handles
 
 - Multi-service Docker Compose stacks.
-- A consistent `dev:up` entry point wired to the resolver-backed full-stack launcher.
+- A consistent `pnpm dev:up` entry point wired to the resolver-backed full-stack launcher.
+- Scoped pnpm migration with a pinned version, imported lockfiles, frozen installs, and aligned Docker/CI workflows unless the user requires another package manager.
 - Development and explicitly supported local-production simulations.
 - Primary application edges, Mailpit, Grafana, debuggers, storage consoles, and other enabled published services.
 - Strict named port overrides and bounded automatic fallback.

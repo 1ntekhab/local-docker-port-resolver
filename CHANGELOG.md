@@ -2,6 +2,16 @@
 
 All notable changes to this project are documented here.
 
+## [2.0.0] - Unreleased
+
+### Changed
+
+- Synchronized the packaged skill, Node/Compose reference, and Codex UI metadata with the global version 2.0.0 skill.
+- **Breaking:** Applying the skill now standardizes full-stack startup and JavaScript dependency management on pnpm, including migration from npm, Yarn, or Bun unless the user explicitly requires another manager. Version 1.6 preserved the existing package manager.
+- Added migration guidance for exact pnpm version pins, supported lockfile imports, frozen installs, dependency build-script approvals, Docker/CI alignment, and production packaging verification while preserving dependency versions where possible.
+- Projects without JavaScript packages may expose the launcher through a private root package while retaining native backend tools and existing launcher implementations.
+- Aligned the README and contribution checklist with the new package-manager policy and required skill validators.
+
 ## [1.6.0] - 2026-09-05
 
 ### Added
@@ -71,3 +81,4 @@ All notable changes to this project are documented here.
 [1.4.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.4.0
 [1.5.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.5.0
 [1.6.0]: https://github.com/1ntekhab/local-docker-port-resolver/releases/tag/v1.6.0
+[2.0.0]: https://github.com/1ntekhab/local-docker-port-resolver/compare/v1.6.0...HEAD

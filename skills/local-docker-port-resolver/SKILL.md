@@ -1,16 +1,16 @@
 ---
 name: local-docker-port-resolver
-description: Add or repair automatic host-port selection for enabled services in local Docker Compose stacks and standardize the project-native full-stack launcher. Use when development or local simulation launchers must avoid conflicts across applications, proxies, mail UIs, dashboards, and other published services while synchronizing public URLs. Keep actual production endpoints explicit.
+description: Standardize local Docker Compose startup on pnpm dev:up and add or repair automatic host-port selection for enabled services. Use when development or local simulation launchers need consistent startup, port-conflict avoidance and synchronized public URLs. Keep actual production endpoints explicit.
 license: MIT
 metadata:
   author: 1ntekhab
-  version: "1.6.0"
+  version: "2.0.0"
   compatibility: Agent Skills-compatible coding agents with repository file and shell access; Docker Compose is required for rendered configuration and live verification.
 ---
 
 # Local Docker Port Resolver
 
-Add predictable local Docker Compose port fallback without changing internal service ports or actual production addressing.
+Provide one canonical `pnpm dev:up` entry point with predictable local Docker Compose port fallback, preserving internal service ports and actual production addressing.
 
 ## Inspect before changing anything
 
@@ -22,12 +22,15 @@ Add predictable local Docker Compose port fallback without changing internal ser
 
 ## Choose the launcher integration
 
-- Prefer the language/runtime already required by the repository and wire the launcher into its existing local start command.
-- In every pnpm-managed repository, expose and document `pnpm dev:up` as the canonical command for starting the complete local Docker Compose development stack. Map the `dev:up` package script to the resolver-backed launcher, not directly to Compose.
+- Standardize the project's launcher and JavaScript dependency management on pnpm, including existing npm, Yarn or Bun projects unless the user explicitly requires another manager. Applying this skill includes the necessary scoped migration; it does not authorize changes to unrelated projects or global agent policy.
+- Expose and document `pnpm dev:up` as the canonical command for starting the complete local Docker Compose development stack. Map the `dev:up` package script to the resolver-backed launcher, not directly to Compose.
 - Replace existing full-stack launcher names such as `local:up` with `dev:up`, update every caller and document, and remove the old package scripts. Do not retain compatibility aliases.
-- Do not introduce pnpm into repositories managed by npm, Yarn, Bun, or another package manager solely to obtain this name; use the equivalent `dev:up` script for that repository's existing package manager.
+- Pin an exact compatible pnpm version in `packageManager`; use that version locally, in Docker and in CI. Document Node/pnpm prerequisites. For a project without JavaScript packages, a private root `package.json` may expose the launcher; retain its native backend dependency tools.
+- Import an existing supported lockfile with `pnpm import` before removing it. Preserve dependency versions where possible, inspect resolution changes, and remove superseded JavaScript lockfiles after a successful frozen install. Do not upgrade application dependencies merely to change package managers.
+- Update install/build/start scripts, Docker contexts, dependency volumes, CI, current documentation and repository instructions together. Use `pnpm install --frozen-lockfile` in automated builds. Preserve archived evidence as history. npm may bootstrap the pinned pnpm executable; it is not an alternative application workflow.
+- Review dependency build-script approvals individually and test stricter dependency resolution and production packaging. Avoid blanket lifecycle-script approval or broad hoisting as a migration shortcut.
 - Keep direct lower-level startup commands available for advanced use unless the user requests their removal.
-- Avoid a new dependency when the existing runtime provides socket probing, process spawning, and environment parsing.
+- Reuse the existing launcher implementation where practical; Node's built-in modules provide socket probing, process spawning and environment parsing without additional dependencies.
 - For a Node.js plus Docker Compose implementation, read [the verified Node/Compose pattern](references/node-compose-pattern.md).
 - Make the supported launcher the documented project startup path. When the repository uses `AGENTS.md`, add or update a repository-local instruction that tells coding agents to prefer the launcher over direct Compose startup while preserving existing instructions.
 - Keep this preference project-scoped. Do not modify a user's global Codex, Claude, Copilot, or other agent instructions unless the user explicitly requests a global policy.
@@ -56,3 +59,4 @@ Add predictable local Docker Compose port fallback without changing internal ser
 - Start each mode a second time and confirm it reuses every current project mapping.
 - Confirm normal environment files, generated secret files, and unrelated tracked files are unchanged; only an explicitly designed resolved-state file may change.
 - Run the repository's normal controls and document automatic startup, named strict overrides, optional-profile behavior, printed URLs, state loading, and the difference between host and container ports.
+- Verify the pinned pnpm version, frozen installation, argument forwarding, frontend checks and production image build/start when applicable. Refresh only disposable dependency/build caches when necessary; preserve database/media volumes, credentials and user records.
